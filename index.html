@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EDOC.AI | Get Started</title>
+<title>EDOC.AI | Demo Form</title>
 
 <style>
 * {
@@ -14,24 +14,58 @@
 
 body {
     font-family: 'Segoe UI', sans-serif;
+    background: url('https://salesforceweb.github.io/AISalesforceBackground') no-repeat center center/cover;
     height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
-    url('https://salesforceweb.github.io/companyLogo.png');
-    background-size: cover;
-    background-position: center;
+}
+
+/* MAIN LAYOUT */
+.wrapper {
     display: flex;
+    height: 100vh;
+    backdrop-filter: blur(3px);
+}
+
+/* LEFT SIDE */
+.left {
+    flex: 1;
+    color: white;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+}
+
+.left h1 {
+    font-size: 42px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.highlight {
+    background: #22c55e;
+    padding: 4px 10px;
+    border-radius: 4px;
+    color: black;
+}
+
+.left p {
+    margin-top: 20px;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+/* RIGHT FORM */
+.right {
+    width: 400px;
+    background: #38b2ac; /* teal based on your logo */
+    padding: 30px;
+    display: flex;
     align-items: center;
 }
 
-.container {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 30px;
-    border-radius: 14px;
+/* FORM BOX */
+.form-box {
     width: 100%;
-    max-width: 420px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
 }
 
 .logo {
@@ -40,91 +74,137 @@ body {
 }
 
 .logo img {
-    width: 110px;
+    width: 100px;
 }
 
-h2 {
-    text-align: center;
-    color: #1e3a8a;
-    margin-bottom: 20px;
+.form-box h2 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 18px;
 }
 
+/* INPUTS */
 input, select {
     width: 100%;
-    padding: 12px;
-    margin-top: 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    outline: none;
     font-size: 14px;
 }
 
+/* CHECKBOX */
+.checkbox {
+    display: flex;
+    align-items: start;
+    font-size: 12px;
+    color: white;
+    margin: 10px 0;
+}
+
+.checkbox input {
+    margin-right: 8px;
+}
+
+/* BUTTON */
 button {
     width: 100%;
-    padding: 13px;
-    margin-top: 18px;
-    background: linear-gradient(135deg, #1e3a8a, #2563eb);
-    color: white;
+    padding: 12px;
+    background: #a3e635;
     border: none;
-    border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
 }
 
 button:hover {
-    background: linear-gradient(135deg, #0f172a, #1e40af);
+    background: #84cc16;
 }
 
-.footer {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 12px;
-    color: gray;
+/* MOBILE */
+@media(max-width: 900px){
+    .wrapper {
+        flex-direction: column;
+    }
+
+    .left {
+        padding: 30px;
+        text-align: center;
+    }
+
+    .right {
+        width: 100%;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="wrapper">
 
-    <!-- LOGO -->
-    <div class="logo">
-        <img src="https://salesforceweb.github.io/companyLogo.png" alt="EDOC Logo">
+    <!-- LEFT CONTENT -->
+    <div class="left">
+        <h1>
+            Book a free live<br>
+            demo tailored to <br>
+            <span class="highlight">your</span> business needs
+        </h1>
+
+        <p>
+            Experience how EDOC.AI can transform your business with intelligent document automation.
+        </p>
     </div>
 
-    <h2>EDOC.AI Lead Form</h2>
+    <!-- RIGHT FORM -->
+    <div class="right">
 
-    <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dg5000008Q5ic" method="POST">
+        <div class="form-box">
 
-        <!-- Salesforce Hidden Fields -->
-        <input type="hidden" name="oid" value="00Dg5000008Q5ic">
-        <input type="hidden" name="retURL" value="https://salesforceweb.github.io/thankyou">
-        <input type="hidden" name="lead_source" value="QR Campaign">
+            <div class="logo">
+                <img src="https://salesforceweb.github.io/companyLogo.png">
+            </div>
 
-        <!-- Form Fields -->
-        <input type="text" name="first_name" placeholder="First Name (Optional)">
-        
-        <input type="text" name="last_name" placeholder="Last Name *" required>
+            <h2>Get Started</h2>
 
-        <input type="email" name="email" placeholder="Email Address *" required>
+            <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dg5000008Q5ic" method="POST">
 
-        <input type="Phone" name="Phone" placeholder="Phone *" required>
+                <!-- Hidden Fields -->
+                <input type="hidden" name="oid" value="00Dg5000008Q5ic">
+                <input type="hidden" name="retURL" value="https://salesforceweb.github.io/thankyou">
 
-        <input type="text" name="company" placeholder="Company Name *" required>
+                <!-- Fields -->
+                <input type="email" name="email" placeholder="Work Email *" required>
+                <input type="text" name="first_name" placeholder="First Name">
+                <input type="text" name="last_name" placeholder="Last Name *" required>
+                <input type="text" name="company" placeholder="Company Name *" required>
 
-        <select name="country_code">
-            <option value="">Select Country</option>
-            <option value="IN">India</option>
-            <option value="AE">UAE</option>
-            <option value="US">USA</option>
-        </select>
+                <select>
+                    <option># of Employees</option>
+                    <option>1-10</option>
+                    <option>11-50</option>
+                    <option>50+</option>
+                </select>
 
-        <button type="submit">Submit</button>
+                <input type="text" name="phone" placeholder="Phone (Optional)">
 
-    </form>
+                <select name="country_code">
+                    <option value="">Country</option>
+                    <option value="IN">India</option>
+                    <option value="AE">UAE</option>
+                    <option value="US">USA</option>
+                </select>
 
-    <div class="footer">
-        Powered by EDOC.AI
+                <div class="checkbox">
+                    <input type="checkbox" required>
+                    <label>I agree to receive information and accept privacy policy</label>
+                </div>
+
+                <button type="submit">Submit</button>
+
+            </form>
+
+        </div>
+
     </div>
 
 </div>
