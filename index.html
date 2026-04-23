@@ -1,213 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EDOC.AI | Demo Form</title>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background: url('https://salesforceweb.github.io/AISalesforceBackground') no-repeat center center/cover;
-    height: 100vh;
-}
-
-/* MAIN LAYOUT */
-.wrapper {
-    display: flex;
-    height: 100vh;
-    backdrop-filter: blur(3px);
-}
-
-/* LEFT SIDE */
-.left {
-    flex: 1;
-    color: white;
-    padding: 80px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.left h1 {
-    font-size: 42px;
-    font-weight: bold;
-    line-height: 1.2;
-}
-
-.highlight {
-    background: #22c55e;
-    padding: 4px 10px;
-    border-radius: 4px;
-    color: black;
-}
-
-.left p {
-    margin-top: 20px;
-    font-size: 16px;
-    opacity: 0.9;
-}
-
-/* RIGHT FORM */
-.right {
-    width: 400px;
-    background: #38b2ac; /* teal based on your logo */
-    padding: 30px;
-    display: flex;
-    align-items: center;
-}
-
-/* FORM BOX */
-.form-box {
-    width: 100%;
-}
-
-.logo {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.logo img {
-    width: 100px;
-}
-
-.form-box h2 {
-    color: white;
-    margin-bottom: 15px;
-    font-size: 18px;
-}
-
-/* INPUTS */
-input, select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: none;
-    outline: none;
-    font-size: 14px;
-}
-
-/* CHECKBOX */
-.checkbox {
-    display: flex;
-    align-items: start;
-    font-size: 12px;
-    color: white;
-    margin: 10px 0;
-}
-
-.checkbox input {
-    margin-right: 8px;
-}
-
-/* BUTTON */
-button {
-    width: 100%;
-    padding: 12px;
-    background: #a3e635;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #84cc16;
-}
-
-/* MOBILE */
-@media(max-width: 900px){
-    .wrapper {
-        flex-direction: column;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDOC.AI - Lead Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Floating label */
+    .field { position: relative; }
+    .field input, .field textarea, .field select {
+      width: 100%;
+      padding: 14px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      outline: none;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .field label {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #cbd5e1;
+      font-size: 14px;
+      pointer-events: none;
+      transition: all .2s ease;
+      background: transparent;
+      padding: 0 4px;
+    }
+    .field input:focus + label,
+    .field input:not(:placeholder-shown) + label,
+    .field textarea:focus + label,
+    .field textarea:not(:placeholder-shown) + label,
+    .field select:focus + label,
+    .field select:not([value=""]) + label {
+      top: -8px;
+      font-size: 11px;
+      color: #93c5fd;
+      background: rgba(0,0,0,0.6);
+      border-radius: 6px;
     }
 
-    .left {
-        padding: 30px;
-        text-align: center;
+    /* AI typing effect */
+    .typing::after {
+      content: '|';
+      animation: blink 1s infinite;
     }
-
-    .right {
-        width: 100%;
-    }
-}
-</style>
+    @keyframes blink { 50% { opacity: 0; } }
+  </style>
 </head>
+<body class="h-screen w-full bg-cover bg-center flex items-center justify-center" style="background-image: url('https://salesforceweb.github.io/AISalesforceBackground');">
 
-<body>
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/60"></div>
 
-<div class="wrapper">
-
-    <!-- LEFT CONTENT -->
-    <div class="left">
-        <h1>
-            Book a free live<br>
-            demo tailored to <br>
-            <span class="highlight">your</span> business needs
-        </h1>
-
-        <p>
-            Experience how EDOC.AI can transform your business with intelligent document automation.
-        </p>
+  <!-- Form Container -->
+  <div class="relative z-10 w-full max-w-lg p-8 bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20">
+    
+    <!-- Header with Logo -->
+    <div class="flex items-center justify-center gap-3 mb-6">
+      <img src="https://salesforceweb.github.io/companyLogo.png" alt="EDOC Logo" class="w-12 h-12 object-contain rounded-lg shadow-md bg-white/20 p-1">
+      <div>
+        <h1 class="text-2xl font-bold text-white">EDOC.AI</h1>
+        <p class="text-gray-300 text-xs">AI • Salesforce • Automation</p>
+      </div>
     </div>
 
-    <!-- RIGHT FORM -->
-    <div class="right">
-
-        <div class="form-box">
-
-            <div class="logo">
-                <img src="https://salesforceweb.github.io/companyLogo.png">
-            </div>
-
-            <h2>Get Started</h2>
-
-            <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dg5000008Q5ic" method="POST">
-
-                <!-- Hidden Fields -->
-                <input type="hidden" name="oid" value="00Dg5000008Q5ic">
-                <input type="hidden" name="retURL" value="https://salesforceweb.github.io/thankyou">
-
-                <!-- Fields -->
-                <input type="email" name="email" placeholder="Work Email *" required>
-                <input type="text" name="first_name" placeholder="First Name">
-                <input type="text" name="last_name" placeholder="Last Name *" required>
-                <input type="text" name="company" placeholder="Company Name *" required>
-
-                <select>
-                    <option># of Employees</option>
-                    <option>1-10</option>
-                    <option>11-50</option>
-                    <option>50+</option>
-                </select>
-
-                <input type="text" name="phone" placeholder="Phone (Optional)">
-
-                <select name="country_code">
-                    <option value="">Country</option>
-                    <option value="IN">India</option>
-                    <option value="AE">UAE</option>
-                    <option value="US">USA</option>
-                </select>
-
-                <div class="checkbox">
-                    <input type="checkbox" required>
-                    <label>I agree to receive information and accept privacy policy</label>
-                </div>
-
-                <button type="submit">Submit</button>
-
-            </form>
-
-        </div>
-
+    <!-- AI Live Text -->
+    <div class="text-center text-blue-300 text-sm mb-4">
+      <span id="aiText" class="typing"></span>
     </div>
 
-</div>
+    <!-- Form -->
+    <form action="#" method="POST" class="space-y-4">
+
+      <div class="field">
+        <input type="text" required placeholder=" ">
+        <label>Full Name <span class="text-red-400">*</span></label>
+      </div>
+
+      <div class="field">
+        <input type="email" required placeholder=" ">
+        <label>Email <span class="text-red-400">*</span></label>
+      </div>
+
+      <div class="field">
+        <input type="text" required placeholder=" ">
+        <label>Company <span class="text-red-400">*</span></label>
+      </div>
+
+      <div class="field">
+        <input type="tel" required placeholder=" ">
+        <label>Phone <span class="text-red-400">*</span></label>
+      </div>
+
+      <div class="field">
+        <select value="">
+          <option value="" disabled selected></option>
+          <option>Salesforce CRM</option>
+          <option>AI Solutions</option>
+          <option>Automation</option>
+          <option>Other</option>
+        </select>
+        <label>Service Interested</label>
+      </div>
+
+      <div class="field">
+        <textarea rows="3" placeholder=" "></textarea>
+        <label>Message</label>
+      </div>
+
+      <!-- Button -->
+      <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:scale-105 transition duration-300 shadow-lg">
+        Submit
+      </button>
+
+    </form>
+
+  </div>
+
+  <script>
+    // AI typing effect
+    const text = "AI Assistant is ready to help you...";
+    let i = 0;
+    function typeEffect() {
+      if (i < text.length) {
+        document.getElementById("aiText").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeEffect, 40);
+      }
+    }
+    typeEffect();
+  </script>
 
 </body>
 </html>
