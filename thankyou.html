@@ -3,140 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EDOC.AI | Get Started</title>
+<title>Thank You - EDOC.AI</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'Segoe UI', sans-serif;
-    height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
-    url('https://salesforceweb.github.io/companyLogo.png');
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+    url('https://raw.githubusercontent.com/salesforceweb/salesforceweb.github.io/main/image%20(5).png');
     background-size: cover;
-    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-/* Glass Effect */
-.container {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 30px;
-    border-radius: 14px;
-    width: 100%;
-    max-width: 420px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-    animation: fadeIn 0.8s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px);}
-    to { opacity: 1; transform: translateY(0);}
-}
-
-.logo {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.logo img {
-    width: 110px;
-}
-
-h2 {
-    text-align: center;
-    color: #1e3a8a;
-    margin-bottom: 20px;
-}
-
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin-top: 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    transition: 0.2s;
-}
-
-input:focus, select:focus {
-    border-color: #1e3a8a;
-    outline: none;
-    box-shadow: 0 0 5px rgba(30,58,138,0.3);
-}
-
-button {
-    width: 100%;
-    padding: 13px;
-    margin-top: 18px;
-    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    height: 100vh;
     color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 15px;
-}
-
-button:hover {
-    background: linear-gradient(135deg, #0f172a, #1e40af);
-}
-
-.footer {
     text-align: center;
-    margin-top: 15px;
-    font-size: 12px;
-    color: gray;
+}
+
+.box {
+    background: rgba(0,0,0,0.6);
+    padding: 40px;
+    border-radius: 12px;
+}
+
+h1 {
+    color: #22c55e;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-
-    <!-- LOGO -->
-    <div class="logo">
-        <img src="https://salesforceweb.github.io/companyLogo.png" alt="EDOC Logo">
-    </div>
-
-    <h2>EDOC.AI Lead Form</h2>
-
-    <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dg5000008Q5ic" method="POST">
-
-        <!-- Salesforce Hidden Fields -->
-        <input type="hidden" name="oid" value="00Dg5000008Q5ic">
-        <input type="hidden" name="retURL" value="https://salesforceweb.github.io/thankyou">
-        <input type="hidden" name="lead_source" value="QR Campaign">
-
-        <!-- Form Fields -->
-        <input type="text" name="first_name" placeholder="First Name" required>
-        <input type="text" name="last_name" placeholder="Last Name" required>
-        <input type="email" name="email" placeholder="Email Address" required>
-        <input type="text" name="company" placeholder="Company Name">
-
-        <select name="country_code">
-            <option value="">Select Country</option>
-            <option value="IN">India</option>
-            <option value="AE">UAE</option>
-            <option value="US">USA</option>
-        </select>
-
-        <button type="submit">Submit</button>
-
-    </form>
-
-    <div class="footer">
-        Powered by EDOC.AI
-    </div>
-
+<div class="box">
+    <h1>✅ Thank You!</h1>
+    <p>Your details have been submitted successfully.</p>
+    <p>Our team will contact you soon.</p>
 </div>
 
 </body>
