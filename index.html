@@ -5,75 +5,85 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EDOC.AI - Lead Form</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.umd.js"></script>
+
   <style>
-    /* Floating label */
-    .field { position: relative; }
-    .field input, .field textarea, .field select {
+    .field { position: relative; margin-top: 18px; }
+
+    .field input, .field textarea {
       width: 100%;
-      padding: 14px 14px;
+      padding: 18px 14px 10px;
       border-radius: 14px;
-      background: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.15);
       color: #fff;
       outline: none;
       border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
     }
+
     .field label {
       position: absolute;
       left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
+      top: 16px;
       color: #cbd5e1;
-      font-size: 14px;
+      font-size: 13px;
       pointer-events: none;
-      transition: all .2s ease;
-      background: transparent;
+      transition: all .25s ease;
       padding: 0 4px;
     }
+
     .field input:focus + label,
     .field input:not(:placeholder-shown) + label,
     .field textarea:focus + label,
-    .field textarea:not(:placeholder-shown) + label,
-    .field select:focus + label,
-    .field select:not([value=""]) + label {
+    .field textarea:not(:placeholder-shown) + label {
       top: -8px;
       font-size: 11px;
-      color: #93c5fd;
-      background: rgba(0,0,0,0.6);
+      color: #60a5fa;
+      background: rgba(0,0,0,0.7);
       border-radius: 6px;
     }
 
-    /* AI typing effect */
     .typing::after {
       content: '|';
       animation: blink 1s infinite;
     }
+
     @keyframes blink { 50% { opacity: 0; } }
+
+    /* Animation */
+    .fade-in {
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
   </style>
 </head>
-<body class="h-screen w-full bg-cover bg-center flex items-center justify-center" style="background-image: url('https://salesforceweb.github.io/AISalesforceBackground');">
 
-  <!-- Overlay -->
-  <div class="absolute inset-0 bg-black/60"></div>
+<body class="min-h-screen w-full bg-cover bg-center flex items-center justify-center p-4" style="background-image: url('https://salesforceweb.github.io/AISalesforceBackground');">
 
-  <!-- Form Container -->
-  <div class="relative z-10 w-full max-w-lg p-8 bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20">
+  <div class="absolute inset-0 bg-black/70"></div>
+
+  <div class="relative z-10 w-full max-w-md sm:max-w-lg p-6 sm:p-8 bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 fade-in">
     
-    <!-- Header with Logo -->
+    <!-- Header -->
     <div class="flex items-center justify-center gap-3 mb-6">
-      <img src="https://salesforceweb.github.io/companyLogo.png" alt="EDOC Logo" class="w-12 h-12 object-contain rounded-lg shadow-md bg-white/20 p-1">
+      <img src="https://salesforceweb.github.io/companyLogo.png" class="h-10 w-auto">
       <div>
-        <h1 class="text-2xl font-bold text-white">EDOC.AI</h1>
+        <h1 class="text-xl sm:text-2xl font-bold text-white">EDOC.AI</h1>
         <p class="text-gray-300 text-xs">AI • Salesforce • Automation</p>
       </div>
     </div>
 
-    <!-- AI Live Text -->
+    <!-- AI Text -->
     <div class="text-center text-blue-300 text-sm mb-4">
       <span id="aiText" class="typing"></span>
     </div>
 
-    <!-- Form -->
-    <form action="#" method="POST" class="space-y-4">
+    <form class="space-y-3 sm:space-y-4">
 
       <div class="field">
         <input type="text" required placeholder=" ">
@@ -95,15 +105,22 @@
         <label>Phone <span class="text-red-400">*</span></label>
       </div>
 
-      <div class="field">
-        <select value="">
-          <option value="" disabled selected></option>
-          <option>Salesforce CRM</option>
-          <option>AI Solutions</option>
-          <option>Automation</option>
-          <option>Other</option>
-        </select>
-        <label>Service Interested</label>
+      <!-- Custom Dropdown -->
+      <div class="mt-4">
+        <label class="text-xs text-gray-300">Service Interested</label>
+        <div class="relative mt-2">
+          <button type="button" id="dropdownBtn" class="w-full text-left px-4 py-3 rounded-xl bg-gradient-to-r from-slate-800 to-slate-700 text-gray-200 border border-white/20 flex justify-between items-center hover:scale-[1.02] transition">
+            <span id="selectedText">Select Service</span>
+            <span>▾</span>
+          </button>
+
+          <div id="dropdownMenu" class="hidden absolute w-full mt-2 rounded-xl bg-slate-900 border border-white/20 shadow-xl overflow-hidden z-50 animate-fade">
+            <div class="option px-4 py-3 hover:bg-slate-700 cursor-pointer">☁️ Salesforce CRM</div>
+            <div class="option px-4 py-3 hover:bg-slate-700 cursor-pointer">🤖 AI Solutions</div>
+            <div class="option px-4 py-3 hover:bg-slate-700 cursor-pointer">⚡ Automation</div>
+            <div class="option px-4 py-3 hover:bg-slate-700 cursor-pointer">Other</div>
+          </div>
+        </div>
       </div>
 
       <div class="field">
@@ -111,8 +128,7 @@
         <label>Message</label>
       </div>
 
-      <!-- Button -->
-      <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:scale-105 transition duration-300 shadow-lg">
+      <button class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:scale-105 active:scale-95 transition duration-300 shadow-lg">
         Submit
       </button>
 
@@ -121,17 +137,37 @@
   </div>
 
   <script>
-    // AI typing effect
+    // AI typing
     const text = "AI Assistant is ready to help you...";
     let i = 0;
     function typeEffect() {
       if (i < text.length) {
         document.getElementById("aiText").innerHTML += text.charAt(i);
         i++;
-        setTimeout(typeEffect, 40);
+        setTimeout(typeEffect, 35);
       }
     }
     typeEffect();
+
+    // Dropdown
+    const btn = document.getElementById('dropdownBtn');
+    const menu = document.getElementById('dropdownMenu');
+    const selectedText = document.getElementById('selectedText');
+
+    btn.onclick = () => menu.classList.toggle('hidden');
+
+    document.querySelectorAll('.option').forEach(opt => {
+      opt.onclick = () => {
+        selectedText.textContent = opt.textContent;
+        menu.classList.add('hidden');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!btn.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.add('hidden');
+      }
+    });
   </script>
 
 </body>
