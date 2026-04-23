@@ -3,58 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EDOC.AI | Lead Form</title>
+<title>EDOC.AI | Get Started</title>
 
 <style>
-body {
+* {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-    url('https://raw.githubusercontent.com/salesforceweb/salesforceweb.github.io/main/image%20(5).png');
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+    url('https://salesforceweb.github.io/companyLogo.png');
     background-size: cover;
     background-position: center;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* Glass Effect */
 .container {
-    background: rgba(255,255,255,0.95);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     padding: 30px;
-    border-radius: 12px;
+    border-radius: 14px;
     width: 100%;
-    max-width: 400px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    max-width: 420px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.logo img {
+    width: 110px;
 }
 
 h2 {
     text-align: center;
     color: #1e3a8a;
+    margin-bottom: 20px;
 }
 
 input, select {
     width: 100%;
     padding: 12px;
-    margin-top: 10px;
+    margin-top: 12px;
     border-radius: 6px;
     border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+input:focus, select:focus {
+    border-color: #1e3a8a;
+    outline: none;
+    box-shadow: 0 0 5px rgba(30,58,138,0.3);
 }
 
 button {
     width: 100%;
-    padding: 12px;
-    margin-top: 15px;
-    background: #1e3a8a;
+    padding: 13px;
+    margin-top: 18px;
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
     color: white;
     border: none;
     border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
+    font-size: 15px;
 }
 
 button:hover {
-    background: #0f172a;
+    background: linear-gradient(135deg, #0f172a, #1e40af);
+}
+
+.footer {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 12px;
+    color: gray;
 }
 </style>
 </head>
@@ -62,22 +101,29 @@ button:hover {
 <body>
 
 <div class="container">
+
+    <!-- LOGO -->
+    <div class="logo">
+        <img src="https://salesforceweb.github.io/companyLogo.png" alt="EDOC Logo">
+    </div>
+
     <h2>EDOC.AI Lead Form</h2>
 
     <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dg5000008Q5ic" method="POST">
 
+        <!-- Salesforce Hidden Fields -->
         <input type="hidden" name="oid" value="00Dg5000008Q5ic">
-        <input type="hidden" name="retURL" value="https://yourusername.github.io/your-repo/thankyou.html">
+        <input type="hidden" name="retURL" value="https://salesforceweb.github.io/thankyou">
         <input type="hidden" name="lead_source" value="QR Campaign">
 
+        <!-- Form Fields -->
         <input type="text" name="first_name" placeholder="First Name" required>
         <input type="text" name="last_name" placeholder="Last Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="company" placeholder="Company">
-        <input type="text" name="city" placeholder="City">
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="text" name="company" placeholder="Company Name">
 
         <select name="country_code">
-            <option value="">Country</option>
+            <option value="">Select Country</option>
             <option value="IN">India</option>
             <option value="AE">UAE</option>
             <option value="US">USA</option>
@@ -86,6 +132,11 @@ button:hover {
         <button type="submit">Submit</button>
 
     </form>
+
+    <div class="footer">
+        Powered by EDOC.AI
+    </div>
+
 </div>
 
 </body>
