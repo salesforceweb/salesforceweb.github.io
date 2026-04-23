@@ -24,7 +24,6 @@ body {
     align-items: center;
 }
 
-/* Glass Effect */
 .container {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
@@ -33,12 +32,6 @@ body {
     width: 100%;
     max-width: 420px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-    animation: fadeIn 0.8s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px);}
-    to { opacity: 1; transform: translateY(0);}
 }
 
 .logo {
@@ -63,13 +56,6 @@ input, select {
     border-radius: 6px;
     border: 1px solid #ccc;
     font-size: 14px;
-    transition: 0.2s;
-}
-
-input:focus, select:focus {
-    border-color: #1e3a8a;
-    outline: none;
-    box-shadow: 0 0 5px rgba(30,58,138,0.3);
 }
 
 button {
@@ -82,7 +68,6 @@ button {
     border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
-    font-size: 15px;
 }
 
 button:hover {
@@ -117,10 +102,13 @@ button:hover {
         <input type="hidden" name="lead_source" value="QR Campaign">
 
         <!-- Form Fields -->
-        <input type="text" name="first_name" placeholder="First Name" required>
-        <input type="text" name="last_name" placeholder="Last Name" required>
-        <input type="email" name="email" placeholder="Email Address" required>
-        <input type="text" name="company" placeholder="Company Name">
+        <input type="text" name="first_name" placeholder="First Name (Optional)">
+        
+        <input type="text" name="last_name" placeholder="Last Name *" required>
+
+        <input type="email" name="email" placeholder="Email Address *" required>
+
+        <input type="text" name="company" placeholder="Company Name *" required>
 
         <select name="country_code">
             <option value="">Select Country</option>
