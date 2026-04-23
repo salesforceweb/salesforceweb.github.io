@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You - EDOC.AI</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+    url('https://raw.githubusercontent.com/salesforceweb/salesforceweb.github.io/main/image%20(5).png');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    text-align: center;
+}
+
+.box {
+    background: rgba(0,0,0,0.6);
+    padding: 40px;
+    border-radius: 12px;
+}
+
+h1 {
+    color: #22c55e;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>✅ Thank You!</h1>
+    <p>Your details have been submitted successfully.</p>
+    <p>Our team will contact you soon.</p>
+</div>
+
+</body>
+</html>
