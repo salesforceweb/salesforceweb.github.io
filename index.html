@@ -168,6 +168,12 @@
         menu.classList.add('hidden');
       }
     });
+    document.querySelector("form").addEventListener("submit", function(e) {
+    e.preventDefault(); // stop default submit
+
+   // redirect to thank you page
+    window.location.href = "thankyou.html";
+  });
   </script>
 
 </body>
