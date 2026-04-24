@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDOC.AI - Lead Form</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    .field { position: relative; margin-top: 18px; }
+
+    .field input, .field textarea, .field select {
+      width: 100%;
+      padding: 18px 14px 10px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      outline: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .field label {
+      position: absolute;
+      left: 14px;
+      top: 16px;
+      color: #cbd5e1;
+      font-size: 13px;
+      pointer-events: none;
+      transition: all .25s ease;
+      padding: 0 4px;
+    }
+
+    .field input:focus + label,
+    .field input:not(:placeholder-shown) + label,
+    .field textarea:focus + label,
+    .field textarea:not(:placeholder-shown) + label,
+    .field select:focus + label,
+    .field select:not([value=""]) + label {
+      top: -8px;
+      font-size: 11px;
+      color: #60a5fa;
+      background: rgba(0,0,0,0.7);
+      border-radius: 6px;
+    }
+
+    .typing::after { content: '|'; animation: blink 1s infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .fade-in { animation: fadeIn 0.8s ease forwards; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen w-full bg-cover bg-center flex items-center justify-center p-4"
+style="background-image: url('https://salesforceweb.github.io/AISalesforceBackground');">
+
+<div class="absolute inset-0 bg-black/70"></div>
+
+<div class="relative z-10 w-full max-w-md sm:max-w-lg p-6 sm:p-8 bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 fade-in">
+
+  <!-- Header -->
+  <div class="flex items-center justify-center gap-3 mb-6">
+    <img src="https://salesforceweb.github.io/companyLogo.png" class="h-10 w-auto">
+    <div>
+      <h1 class="text-xl sm:text-2xl font-bold text-white">EDOC.AI</h1>
+      <p class="text-gray-300 text-xs">AI • Salesforce • Automation</p>
+    </div>
+  </div>
+
+  <div class="text-center text-blue-300 text-sm mb-4">
+    <span id="aiText" class="typing"></span>
+  </div>
+
+  <form id="leadForm"
+    action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
+    method="POST"
+    class="space-y-3 sm:space-y-4">
+
+    <input type="hidden" name="oid" value="YOUR_ORG_ID_HERE">
+    <input type="hidden" name="retURL" value="https://salesforceweb.github.io/thankyou.html">
+    <input type="hidden" id="serviceField" name="Service_Interested__c">
+
+    <!-- Full Name -->
+    <div class="field">
+      <input type="text" name="last_name" required placeholder=" ">
+      <label>Full Name <span class="text-red-400">*</span></label>
+    </div>
+
+    <div class="field">
+      <input type="email" name="email" required placeholder=" ">
+      <label>Email <span class="text-red-400">*</span></label>
+    </div>
+
+    <div class="field">
+      <input type="text" name="company" required placeholder=" ">
+      <label>Company <span class="text-red-400">*</span></label>
+    </div>
+
+    <!-- Country -->
+    <div class="field">
+      <select id="country_code" name="country_code" onchange="updateStates()" required>
+        <option value=""></option>
+        <option value="IN">India</option>
+        <option value="US">United States</option>
+      </select>
+      <label>Country <span class="text-red-400">*</span></label>
+    </div>
+
+    <!-- State -->
+    <div class="field">
+      <select id="state_code" name="state_code" onchange="updateCities()" required>
+        <option value=""></option>
+      </select>
+      <label>State <span class="text-red-400">*</span></label>
+    </div>
+
+    <!-- City -->
+    <div class="field">
+      <select id="city_select" name="city" required>
+        <option value=""></option>
+      </select>
+      <label>City <span class="text-red-400">*</span></label>
+    </div>
+
+    <div class="field">
+      <input type="tel" name="phone" required placeholder=" " pattern="[0-9]{10}">
+      <label>Phone <span class="text-red-400">*</span></label>
+    </div>
+
+    <!-- Dropdown -->
+    <div class="mt-4">
+      <label class="text-xs text-gray-300">Service Interested</label>
+
+      <div class="relative mt-2">
+        <button type="button" id="dropdownBtn"
+          class="w-full text-left px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.15)] text-white border border-[rgba(255,255,255,0.2)] backdrop-blur-md flex justify-between">
+          <span id="selectedText">Select Service</span>
+          <span>▾</span>
+        </button>
+
+        <div id="dropdownMenu" class="hidden absolute w-full mt-2 rounded-xl bg-[rgba(15,23,42,0.95)] shadow-2xl z-50">
+          <div class="option px-4 py-3 hover:bg-white/20 cursor-pointer text-white">Salesforce CRM</div>
+          <div class="option px-4 py-3 hover:bg-white/20 cursor-pointer text-white">AI Solutions</div>
+          <div class="option px-4 py-3 hover:bg-white/20 cursor-pointer text-white">Automation</div>
+          <div class="option px-4 py-3 hover:bg-white/20 cursor-pointer text-white">Other</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <textarea name="description" rows="3" placeholder=" "></textarea>
+      <label>Message</label>
+    </div>
+
+    <button class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:scale-105 transition">
+      Submit
+    </button>
+
+  </form>
+</div>
+
+<script>
+// Typing
+const text = "AI Assistant is ready to help you...";
+let i = 0;
+(function type(){ if(i<text.length){ aiText.innerHTML+=text[i++]; setTimeout(type,35);} })();
+
+// Dropdown
+dropdownBtn.onclick = e => { e.stopPropagation(); dropdownMenu.classList.toggle('hidden'); };
+document.querySelectorAll('.option').forEach(o=>{
+  o.onclick=()=>{selectedText.textContent=o.textContent;serviceField.value=o.textContent;dropdownMenu.classList.add('hidden');}
+});
+document.onclick=()=>dropdownMenu.classList.add('hidden');
+
+// Location Dependency
+const data = {
+  IN:{ "West Bengal":["Kolkata","Howrah"], "Delhi":["New Delhi"] },
+  US:{ "California":["Los Angeles","San Francisco"] }
+};
+
+function updateStates(){
+  state_code.innerHTML='<option value=""></option>';
+  city_select.innerHTML='<option value=""></option>';
+  Object.keys(data[country_code.value]||{}).forEach(s=>{
+    state_code.innerHTML+=`<option value="${s}">${s}</option>`;
+  });
+}
+
+function updateCities(){
+  city_select.innerHTML='<option value=""></option>';
+  (data[country_code.value]?.[state_code.value]||[]).forEach(c=>{
+    city_select.innerHTML+=`<option value="${c}">${c}</option>`;
+  });
+}
+
+// Name Split (IMPORTANT FIX)
+leadForm.addEventListener("submit", function(){
+  const full = document.querySelector('[name="last_name"]').value.trim().split(" ");
+  if(full.length>1){
+    const fn=document.createElement("input");
+    fn.type="hidden"; fn.name="first_name"; fn.value=full.shift();
+    this.appendChild(fn);
+    document.querySelector('[name="last_name"]').value=full.join(" ");
+  }
+});
+</script>
+
+</body>
+</html>
