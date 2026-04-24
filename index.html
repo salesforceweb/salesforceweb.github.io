@@ -90,9 +90,6 @@ style="background-image: url('https://salesforceweb.github.io/AISalesforceBackgr
       <input type="hidden" name="oid" value="00Dg5000008Q5ic">
       <input type="hidden" name="retURL" value="https://salesforceweb.github.io/thankyou.html">
 
-        <input type="hidden" name="debug" value="1">
-        <input type="hidden" name="debugEmail" value="diwakar4job@gmail.com">
-
       <!-- Salesforce Field -->
       <input type="hidden" id="serviceField" name="Service_Interested__c">
 
@@ -197,43 +194,6 @@ style="background-image: url('https://salesforceweb.github.io/AISalesforceBackgr
       menu.classList.add('hidden');
     });
   </script>
-  <script>
-document.getElementById("leadForm").addEventListener("submit", function(e) {
-
-  console.log("🚀 Form Submit Triggered");
-
-  try {
-    const form = this;
-    const data = new FormData(form);
-
-    console.log("📦 Form Data:");
-    for (let [key, value] of data.entries()) {
-      console.log(key + ":", value);
-    }
-
-    const required = ["last_name", "email", "company", "phone"];
-    required.forEach(field => {
-      const val = form.querySelector(`[name="${field}"]`)?.value;
-      if (!val) {
-        console.error(`❌ Missing field: ${field}`);
-      }
-    });
-
-    const service = document.getElementById("serviceField").value;
-    if (!service) {
-      console.warn("⚠️ Service not selected");
-    } else {
-      console.log("✅ Service Selected:", service);
-    }
-
-    console.log("✅ Sending data to Salesforce...");
-
-  } catch (err) {
-    console.error("🔥 JS Error:", err);
-  }
-
-});
-</script>
 
 </body>
 </html>
